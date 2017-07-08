@@ -10,6 +10,9 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
             date: "111",
             price: "111"
         }];
+        $scope.numstocks = 0;
+        $scope.peratio = 0;
+        $scope.networth = 0;
         $scope.tempnum = new Array(6);
         //Create a total list for pagination
         $scope.totallist = [];
@@ -54,6 +57,25 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
 
     }
 
+    $scope.decrementqty = function(stockname){
+        for(var i=0; i<$scope.portlist.length;i++){
+            if($scope.portlist[i].stockname == stockname){
+                $scope.portlist[i].stockqty-=1;
+                break;
+            }
+        }
+        $scope.networthCalc();
+    }
+    $scope.incrementqty = function(stockname){
+        for(var i=0; i<$scope.portlist.length;i++){
+            if($scope.portlist[i].stockname == stockname){
+                $scope.portlist[i].stockqty+=1;
+                break;
+            }
+        }
+        $scope.networthCalc();
+    }
+
     $scope.watchlistupdate = function(){
         var totallistcopy = JSON.parse(JSON.stringify($scope.totallist));
         var remainstocks = $scope.totallist.length - $scope.pagestart;
@@ -96,6 +118,16 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
 
     };
 
+    $scope.editportlist= function(stockname,stockqty){
+        for(var i=0; i<$scope.portlist.length;i++){
+            if($scope.portlist[i].stockname == stockname){
+                $scope.portlist[i].stockqty=stockqty;
+                break;
+            }
+        }
+        $scope.networthCalc();
+    };
+
     $scope.removestock = function(stockname){
         for(var i=0;i<$scope.portlist.length;i++){
             if($scope.portlist[i].stockname == stockname){
@@ -107,6 +139,7 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     }
 
     $scope.networthCalc = function(){
+        $scope.numstocks = $scope.portlist.length;
         sum = 0;
         for(var i=0;i<$scope.portlist.length;i++){
             sum+=$scope.portlist[i].stockprice * $scope.portlist[i].stockqty;

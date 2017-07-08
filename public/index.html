@@ -51,11 +51,15 @@
                 <div ng-show="totallist.length - pagestart < 8" style="opacity:0.3">NEXT</div>
             </div>
         </div>
-
-        <div id="bottom-container">
-            <div style="width:35.6%">
-                <div dnd-list="dragdroplist">
-                    <li>
+        <div dnd-list="dragdroplist" style="margin-bottom:1.5rem">
+            <li>
+        <div id="bottom-container" >
+            <div class="ribbon-top" style="background-color: #287DCE;width:14.13rem;top:600px">MANAGE PORTFOLIO</div>
+            <div class="ribbon-top-shadow" style="left:2.94rem;top:607px;width:13.4rem"></div>
+            <div class="triangle-bottom" ></div>
+            <div style="width:36.5%;margin-left:2rem" >
+                <!-- <div dnd-list="dragdroplist">
+                    <li> -->
                         <table id="table-striped" class="table-striped" style="width:100%">
                             <tr>
                                 <th>STOCK</th>
@@ -68,9 +72,9 @@
                                 <tr ng-repeat="stock in portlist">
 
                                     <td style="color:#287DCE;font-size:0.88rem">{{stock.stockname}}</td>
-                                    <td style="color:#101010">{{stock.stockprice}} </td>
-                                    <td  style="color:#222">{{stock.stockqty}} </td>
-                                    <td style="color:#222"> {{(stock.weightage*100).toFixed(2)}}% </td>
+                                    <td style="color:#101010;font-family: 'Proxima Nova';">{{stock.stockprice}} </td>
+                                    <td style="color:#222"> <button class="small-btn" ng-click="decrementqty(stock.stockname)">-</button> <input type="text" ng-model="stock.stockqty" style="width:20px;text-align:center" ng-blur="editportlist(stock.stockname, stock.stockqty)"/> <button class="small-btn"  ng-click="incrementqty(stock.stockname)">+</button> </td>
+                                    <td style="color:#222;font-family: 'Proxima Nova';"> {{(stock.weightage*100).toFixed(2)}}% </td>
                                     <td> <span ng-click="removestock(stock.stockname)"><img src="style/remove_circle - material.png"</span></td>
                                 </tr>
 
@@ -83,35 +87,36 @@
                             </tr>
 
                         </table>
-                    </li>
-                </div>
+                    <!-- </li>
+                </div> -->
             </div>
-            <div style="width:30%">
+            <div style="width:38%;margin-left:2.5rem">
                 <p style="color:#1D70CA;font-size:1.5rem">Portfolio Overview</p>
                 <div zingchart id="chart-1" zc-json="myChartJson" zc-width="100%" zc-height="100%"></div>
             </div>
-            <div style="width:35.6%">
-                <table id="table-details" >
+            <div>
+                <table id="table-details" width:"100%"  style="margin-top:4rem;">
                     <tr>
-                        <th>Stocks</th>
+                        <th style="border:0">Stocks</th>
                         <th >Net Worth</th>
                     </tr>
                     <tr>
-                        <td>6</td>
+                        <td style="border:0">{{numstocks}}</td>
                         <td>₹{{networth.toFixed(2)}}</td>
                     </tr>
                 </table>
-                <table id="table-details">
+
+                <table id="table-details" style="margin-top:2rem">
                     <tr>
-                        <th>P/E Ratio</th>
-                        <th>P/B Ratio</th>
+                        <th style="border:0">P/E Ratio</th>
+                        <th style="border-left: 45px solid #FFF">P/B Ratio</th>
                     </tr>
                     <tr>
-                        <td>{{peratio.toFixed(2)}}</td>
+                        <td style="border:0">{{peratio.toFixed(2)}}</td>
                         <td>12.4</td>
                     </tr>
                 </table>
-                <div class="build-portfolio">
+                <div class="build-portfolio" style="margin-top:2.25rem">
                     <div style="padding-top:1rem;padding-left:1.94rem;font-size:18px;color:#FFF">BUILD PORTFOLIO</div>
                 </div>
             </div>
@@ -120,6 +125,8 @@
 
 
         </div>
+    </li>
+    </div>
 
     </div>
 

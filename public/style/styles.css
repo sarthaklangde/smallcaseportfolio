@@ -64,15 +64,16 @@ li {
     padding-bottom:2.19rem;
     width: 94.1%;
     background-color: #FFF;
-    display: flex;
+    display:flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .card-container{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
-
+    min-height: 15rem;
 }
 
 .build-portfolio{
@@ -101,16 +102,19 @@ li {
 }
 
 #table-details td{
-    padding-top: 1.06rem;
+    border-left: 60px solid #FFF;
+    font-family: 'proxima_nova_ltthin';
+    color: #222;
     font-size:1.75rem;
 }
 
 #table-details th{
+    border-left: 60px solid #FFF;
     color:#287DCE;
-    padding: 8px;
 }
 
 .table-striped tr:nth-child(odd){background-color: #FAFAFA }
+
 
 .card{
     padding-left:1rem;
@@ -124,6 +128,7 @@ li {
     box-shadow: 0 0 4px 0 rgba(0,0,0,0.20);
     border-radius: 4px;
     width:15rem;
+    height:3.5rem;
 }
 .card-group-text{
     margin-top:0.25rem;
@@ -202,4 +207,25 @@ li {
     border-top: 1.5rem solid #0A8DAD;
     border-left: 1.1rem solid transparent;
 
+}
+.triangle-bottom {
+    position: absolute;
+    left: 2.3%;
+    top: 640px;
+    width: 0;
+    z-index: 1;
+    height: 0;
+    border-top: 1.5rem solid #16569B;
+    border-left: 1.1rem solid transparent;
+
+}
+
+.small-btn{
+    margin:0;
+    background-color: #FFF;
+    padding-left:3px;
+    padding-right:3px;
+    color:#287DCE ;
+    border-radius: 3px;
+    border: 2px solid #eee;
 }

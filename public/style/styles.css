@@ -15,6 +15,9 @@ body {
     font-family: 'proxima_nova_ltsemibold', Georgia, sans-serif;
     background-color: #F9F9F9;
 }
+li {
+  list-style-type: none;
+}
 
 #title{
     margin-left: 1.88rem;
@@ -62,7 +65,6 @@ body {
 
 #table-striped {
     border-collapse: collapse;
-    width: 30%;
 }
 
 #table-striped th{
@@ -75,11 +77,12 @@ body {
 
 #table-striped td {
     text-align: center;
-    padding: 8px;
+    height: 3rem;
 }
 
 #table-details td{
-    padding: 8px;
+    padding-top: 1.06rem;
+    font-size:1.75rem;
 }
 
 #table-details th{
@@ -87,7 +90,7 @@ body {
     padding: 8px;
 }
 
-tr:nth-child(even){background-color: #FAFAFA }
+.table-striped tr:nth-child(odd){background-color: #FAFAFA }
 
 .card{
     padding-left:1rem;

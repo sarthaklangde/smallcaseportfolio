@@ -1,4 +1,4 @@
-var myPortfolio = angular.module('myPortfolio',[]);
+var myPortfolio = angular.module('myPortfolio',['dndLists','zingchart-angularjs']);
 
 myPortfolio.controller('PortfolioController',['$scope','$http','$location','$window',function($scope,$http,$location,$window){
     $http.get("/data/data.json")
@@ -10,7 +10,7 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
             date: "111",
             price: "111"
         }];
-
+        $scope.tempnum = new Array(6);
         //Create a total list for pagination
         $scope.totallist = [];
         Object.keys($scope.maindata.price).forEach(function(key) {
@@ -68,9 +68,10 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     }
 
 
-
+    $scope.dragdroplist = [];
     $scope.addstock = function(stockname,stockprice){
         //console.log("e");
+
         var object_found = 0;
         for(var i=0; i<$scope.portlist.length;i++){
             if($scope.portlist[i].stockname == stockname){
@@ -79,14 +80,18 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
                 break;
             }
         }
-        if(object_found == 0){
-            $scope.portlist.push({
-                stockname: stockname,
-                stockprice: stockprice,
-                stockqty: 1
-            })
+        if($scope.portlist.length < 6){
+            if(object_found == 0){
+                $scope.portlist.push({
+                    stockname: stockname,
+                    stockprice: stockprice,
+                    stockqty: 1
+                })
+            }
         }
         $scope.networthCalc();
+
+
         //console.log($scope.portlist);
 
     };
@@ -141,15 +146,40 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
                 //console.log("---------------------------",stockname,"---------------------------");
                 sum+=($scope.maindata.historical[stockname].point[j].price * $scope.portlist[i].stockqty);
             }
-            $scope.networthDate.push({
-                date: $scope.dateList[j],
-                networth: sum
-            });
+            // $scope.networthDate.push({
+            //     date: $scope.dateList[j],
+            //     networth: sum
+            // });
+            $scope.networthDate.push(sum);
 
         }
-
-        //console.log($scope.networthDate);
+        $scope.myChartJson.series[0].values=$scope.networthDate;
+        //console.log("Networth",$scope.networthDate);
 
     }
+
+    $scope.addtoportlist=function(stock){
+        console.log("STOCK",stock);
+        $scope.addstock(stock.name,stock.price);
+    }
+
+    $scope.myChartJson = {
+         type: "area",  // Specify your chart type here.
+          //
+         
+          plot:{
+              aspect: "spline",
+              marker:{
+                  visible: "false"
+              }
+          },
+          "scale-x":{  }, // Creates an interactive legend
+          "scale-y":{ guide:{visible:false}      }, // Creates an interactive legend
+          series: [  // Insert your series data here.
+              { values: []}
+          ]
+  };
+
+
 
 }]);

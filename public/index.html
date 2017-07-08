@@ -17,115 +17,118 @@
     <header>
         <nav></nav>
     </header>
-    <div ng-controller="PortfolioController">
-        <div id="title">smallcase Portfolio Builder</div>
-        <div id="page-container" >
-            <div class="ribbon-top">PICK STOCKS</div>
-            <div class="ribbon-top-shadow"></div>
-            <div class="triangle-top"></div>
-            <div id="top-container">
-                <div style="color:#00A9D2">Showing {{pagestart+1}} - {{pageend}} of {{totallist.length}} matching stocks</div>
-                <div id="filter-button" style="line-height:1.25rem">
-                    <span><img src="style/filter - FontAwesome.png" height="14px"style="margin-right:0.77rem"/>
-                    <span style="font-size:1rem">APPLY FILTERS</span>
-                    <span class="circle">3</span>
-                </span></div>
-            </div>
+    <div class="app-container">
+        <div ng-controller="PortfolioController">
+            <div id="title">smallcase Portfolio Builder</div>
+            <div id="page-container" >
 
 
-            <div class="card-container">
-                <div class="card" dnd-draggable="stock" dnd-moved="addtoportlist(stock)" dnd-effect-allowed="move" ng-repeat="stock in watchlist">
-                    <div style="display:inline-block" >
-                        <div class="card-text">{{stock.name}} </div>
-                        <div class="card-group-text">Financial Services</div>
+
+                <div id="top-container" style="position:relative">
+                    <div class="ribbon-top">PICK STOCKS</div>
+                    <div class="ribbon-top-shadow"></div>
+                    <div class="triangle-top"></div>
+                    <div style="color:#00A9D2">Showing {{pagestart+1}} - {{pageend}} of {{totallist.length}} matching stocks</div>
+                    <div id="filter-button" style="line-height:1.25rem">
+                        <span><img src="style/filter - FontAwesome.png" height="14px"style="margin-right:0.77rem"/>
+                        <span style="font-size:1rem">APPLY FILTERS</span>
+                        <span class="circle">3</span>
+                    </span></div>
+                </div>
+
+
+                <div class="card-container">
+                    <div class="cardnew" dnd-draggable="stock" dnd-moved="addtoportlist(stock)" dnd-effect-allowed="move" ng-repeat="stock in watchlist">
+
+                            <div class="card-text">{{stock.name}}</div>
+                            <div class="card-group-text">Financial Services</div>
+                            <div class="card-price">₹{{stock.price}}</div>
+
                     </div>
-
-                    <div style="display:inline-block;margin-left:2.5rem;" class="card-price"> ₹{{stock.price}}</div>
-
+                </div>
+                <div id="pagination-container">
+                    <div ng-hide="pagestart == 0" ng-click="pageback()">PREV</div>
+                    <div ng-show="pagestart == 0" style="opacity:0.3 ">PREV</div>
+                    <div ng-hide="totallist.length - pagestart < 8" ng-click="pagenext()">NEXT</div>
+                    <div ng-show="totallist.length - pagestart < 8" style="opacity:0.3">NEXT</div>
                 </div>
             </div>
-            <div id="pagination-container">
-                <div ng-hide="pagestart == 0" ng-click="pageback()">PREV</div>
-                <div ng-show="pagestart == 0" style="opacity:0.3 ">PREV</div>
-                <div ng-hide="totallist.length - pagestart < 8" ng-click="pagenext()">NEXT</div>
-                <div ng-show="totallist.length - pagestart < 8" style="opacity:0.3">NEXT</div>
-            </div>
-        </div>
-        <div dnd-list="dragdroplist" style="margin-bottom:1.5rem">
-            <li>
-        <div id="bottom-container" >
-            <div class="ribbon-top" style="background-color: #287DCE;width:14.13rem;top:600px">MANAGE PORTFOLIO</div>
-            <div class="ribbon-top-shadow" style="left:2.94rem;top:607px;width:13.4rem"></div>
-            <div class="triangle-bottom" ></div>
-            <div style="width:36.5%;margin-left:2rem" >
-                <!-- <div dnd-list="dragdroplist">
-                    <li> -->
-                        <table id="table-striped" class="table-striped" style="width:100%">
-                            <tr>
-                                <th>STOCK</th>
-                                <th>PRICE</th>
-                                <th>SHARES</th>
-                                <th>WEIGHT</th>
-                                <th></th>
-                            </tr>
-
-                                <tr ng-repeat="stock in portlist">
-
-                                    <td style="color:#287DCE;font-size:0.88rem">{{stock.stockname}}</td>
-                                    <td style="color:#101010;font-family: 'Proxima Nova';">{{stock.stockprice}} </td>
-                                    <td style="color:#222"> <button class="small-btn" ng-click="decrementqty(stock.stockname)">-</button> <input type="text" ng-model="stock.stockqty" style="width:20px;text-align:center" ng-blur="editportlist(stock.stockname, stock.stockqty)"/> <button class="small-btn"  ng-click="incrementqty(stock.stockname)">+</button> </td>
-                                    <td style="color:#222;font-family: 'Proxima Nova';"> {{(stock.weightage*100).toFixed(2)}}% </td>
-                                    <td> <span ng-click="removestock(stock.stockname)"><img src="style/remove_circle - material.png"</span></td>
+            <div dnd-list="dragdroplist" style="margin-bottom:1.5rem">
+                <li>
+            <div id="bottom-container" style="position:relative">
+                <div class="ribbon-top" style="background-color: #287DCE;width:14.13rem;left:-1rem;">MANAGE PORTFOLIO</div>
+                <div class="ribbon-top-shadow" style="width:13.4rem;left:0rem"></div>
+                <div class="triangle-top" style="border-top: 1.5rem solid #16569B;left:-1rem;"></div>
+                <div style="width:36.5%;margin-left:2rem" >
+                    <!-- <div dnd-list="dragdroplist">
+                        <li> -->
+                            <table id="table-striped" class="table-striped" style="width:100%">
+                                <tr>
+                                    <th>STOCK</th>
+                                    <th>PRICE</th>
+                                    <th>SHARES</th>
+                                    <th>WEIGHT</th>
+                                    <th></th>
                                 </tr>
 
-                            <tr ng-repeat="key in tempnum | limitTo: (portlist.length - tempnum.length) track by $index">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                                    <tr ng-repeat="stock in portlist">
 
-                        </table>
-                    <!-- </li>
-                </div> -->
-            </div>
-            <div style="width:38%;margin-left:2.5rem">
-                <p style="color:#1D70CA;font-size:1.5rem">Portfolio Overview</p>
-                <div zingchart id="chart-1" zc-json="myChartJson" zc-width="100%" zc-height="100%"></div>
-            </div>
-            <div>
-                <table id="table-details" width:"100%"  style="margin-top:4rem;">
-                    <tr>
-                        <th style="border:0">Stocks</th>
-                        <th >Net Worth</th>
-                    </tr>
-                    <tr>
-                        <td style="border:0">{{numstocks}}</td>
-                        <td>₹{{networth.toFixed(2)}}</td>
-                    </tr>
-                </table>
+                                        <td style="color:#287DCE;font-size:0.88rem">{{stock.stockname}}</td>
+                                        <td style="color:#101010;font-family: 'Proxima Nova';">{{stock.stockprice}} </td>
+                                        <td style="color:#222"> <button class="small-btn" ng-click="decrementqty(stock.stockname)">-</button> <input type="text" ng-model="stock.stockqty" style="width:20px;text-align:center" ng-blur="editportlist(stock.stockname, stock.stockqty)"/> <button class="small-btn"  ng-click="incrementqty(stock.stockname)">+</button> </td>
+                                        <td style="color:#222;font-family: 'Proxima Nova';"> {{(stock.weightage*100).toFixed(2)}}% </td>
+                                        <td> <span ng-click="removestock(stock.stockname)"><img src="style/remove_circle - material.png"</span></td>
+                                    </tr>
 
-                <table id="table-details" style="margin-top:2rem">
-                    <tr>
-                        <th style="border:0">P/E Ratio</th>
-                        <th style="border-left: 45px solid #FFF">P/B Ratio</th>
-                    </tr>
-                    <tr>
-                        <td style="border:0">{{peratio.toFixed(2)}}</td>
-                        <td>12.4</td>
-                    </tr>
-                </table>
-                <div class="build-portfolio" style="margin-top:2.25rem">
-                    <div style="padding-top:1rem;padding-left:1.94rem;font-size:18px;color:#FFF">BUILD PORTFOLIO</div>
+                                <tr ng-repeat="key in tempnum | limitTo: (portlist.length - tempnum.length) track by $index">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </table>
+                        <!-- </li>
+                    </div> -->
                 </div>
+                <div style="width:38%;margin-left:2.5rem">
+                    <p style="color:#1D70CA;font-size:1.5rem">Portfolio Overview</p>
+                    <div zingchart id="chart-1" zc-json="myChartJson" zc-width="100%" zc-height="100%"></div>
+                </div>
+                <div>
+                    <table id="table-details" width:"100%"  style="margin-top:4rem;">
+                        <tr>
+                            <th style="border:0">Stocks</th>
+                            <th >Net Worth</th>
+                        </tr>
+                        <tr>
+                            <td style="border:0">{{numstocks}}</td>
+                            <td>₹{{networth.toFixed(2)}}</td>
+                        </tr>
+                    </table>
+
+                    <table id="table-details" style="margin-top:2rem">
+                        <tr>
+                            <th style="border:0">P/E Ratio</th>
+                            <th style="border-left: 45px solid #FFF">P/B Ratio</th>
+                        </tr>
+                        <tr>
+                            <td style="border:0">{{peratio.toFixed(2)}}</td>
+                            <td>12.4</td>
+                        </tr>
+                    </table>
+                    <div class="build-portfolio" style="margin-top:2.25rem">
+                        <div style="padding-top:1rem;padding-left:1.94rem;font-size:18px;color:#FFF">BUILD PORTFOLIO</div>
+                    </div>
+                </div>
+
+
+
+
             </div>
-
-
-
-
+        </li>
         </div>
-    </li>
     </div>
 
     </div>

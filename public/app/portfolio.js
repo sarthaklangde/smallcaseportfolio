@@ -166,15 +166,27 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     $scope.myChartJson = {
          type: "area",  // Specify your chart type here.
           //
-         
+
           plot:{
               aspect: "spline",
               marker:{
                   visible: "false"
               }
           },
-          "scale-x":{  }, // Creates an interactive legend
-          "scale-y":{ guide:{visible:false}      }, // Creates an interactive legend
+          labels:[{
+              text: "VALUE",
+              x: "1%",
+              y:"11%",
+              "font-size":"12px"
+          },{
+              text: "TIME",
+              x: "80%",
+              y:"85%",
+              "font-size":"12px"
+          }
+          ],
+          "scale-x":{}, // Creates an interactive legend
+          "scale-y":{ guide:{visible:false},       }, // Creates an interactive legend
           series: [  // Insert your series data here.
               { values: []}
           ]

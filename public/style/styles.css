@@ -132,6 +132,7 @@ li {
 }
 
 .card-container{
+    min-height:11rem;
     display:flex;
     flex-direction: row;
     padding-left:2rem;

@@ -46,9 +46,9 @@
                     </div>
                 </div>
                 <div id="pagination-container">
-                    <div ng-hide="pagestart == 0" ng-click="pageback()" >PREV</div>
+                    <div ng-hide="pagestart == 0" ng-click="pageback()" style="cursor:pointer" >PREV</div>
                     <div ng-show="pagestart == 0" style="opacity:0.3 ">PREV</div>
-                    <div ng-hide="totallist.length - pagestart < 8" ng-click="pagenext()">NEXT</div>
+                    <div ng-hide="totallist.length - pagestart < 8" ng-click="pagenext()" style="cursor:pointer">NEXT</div>
                     <div ng-show="totallist.length - pagestart < 8" style="opacity:0.3">NEXT</div>
                 </div>
             </div>

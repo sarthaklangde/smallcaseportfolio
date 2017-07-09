@@ -1,4 +1,4 @@
-var myPortfolio = angular.module('myPortfolio',['dndLists','zingchart-angularjs']);
+var myPortfolio = angular.module('myPortfolio',['dndLists','plotly']);
 
 myPortfolio.controller('PortfolioController',['$scope','$http','$location','$window',function($scope,$http,$location,$window){
     $http.get("/data/data.json")
@@ -17,12 +17,12 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
         //Create a total list for pagination
         $scope.totallist = [];
         Object.keys($scope.maindata.price).forEach(function(key) {
-         //console.log(key);
-          var obj = {};
-          obj["name"]=key;
-          obj["price"] = $scope.maindata.price[key];
-          //console.log(obj);
-          $scope.totallist.push(obj);
+            //console.log(key);
+            var obj = {};
+            obj["name"]=key;
+            obj["price"] = $scope.maindata.price[key];
+            //console.log(obj);
+            $scope.totallist.push(obj);
         });
         console.log("ITEMS QYT",$scope.totallist.length);
         //Now create watchlist
@@ -187,6 +187,8 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
 
         }
         $scope.myChartJson.series[0].values=$scope.networthDate;
+        $scope.data[0].y = $scope.networthDate;
+        $scope.data[0].x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
         //console.log("Networth",$scope.networthDate);
 
     }
@@ -197,34 +199,92 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     }
 
     $scope.myChartJson = {
-         type: "area",  // Specify your chart type here.
-          //
+        type: "area",  // Specify your chart type here.
+        //
 
-          plot:{
-              aspect: "spline",
-              marker:{
-                  visible: "false"
-              }
-          },
-          labels:[{
-              text: "VALUE",
-              x: "1%",
-              y:"11%",
-              "font-size":"12px"
-          },{
-              text: "TIME",
-              x: "80%",
-              y:"85%",
-              "font-size":"12px"
-          }
-          ],
-          "scale-x":{}, // Creates an interactive legend
-          "scale-y":{ guide:{visible:false},       }, // Creates an interactive legend
-          series: [  // Insert your series data here.
-              { values: []}
-          ]
-  };
+        plot:{
+            aspect: "spline",
+            marker:{
+                visible: "false"
+            }
+        },
+        labels:[{
+            text: "VALUE",
+            x: "1%",
+            y:"11%",
+            "font-size":"12px"
+        },{
+            text: "TIME",
+            x: "80%",
+            y:"85%",
+            "font-size":"12px"
+        }
+    ],
+    "scale-x":{}, // Creates an interactive legend
+    "scale-y":{ guide:{visible:false},       }, // Creates an interactive legend
+    series: [  // Insert your series data here.
+        { values: []}
+    ]
+};
+
+$scope.data = [{x: [],
+    y: [], type:'scatter',fill: 'tozeroy'}];
+    $scope.layout = {
+        autosize:false,
+        width:380,
+        height:255,
+        margin: {
+            l: 45,
+            r: 35,
+            b: 20,
+            t: 20,
+            pad: 5
+        },
+        annotations: [{
+            xref: 'paper',
+            yref: 'paper',
+            x: 0,
+            xanchor: 'right',
+            y: 1,
+            yanchor: 'bottom',
+            text: 'VALUE',
+            showarrow: false
+          }, {
+            xref: 'paper',
+            yref: 'paper',
+            x: 1,
+            xanchor: 'left',
+            y: 0,
+            yanchor: 'top',
+            text: 'TIME',
+            showarrow: false
+        }],
+        // xaxis: {
+        //     title: 'TIME',
+        //     titlefont: {
+        //         size: 12,
+        //         color: '#1D70CA'
+        //     }
+        // },
+        // yaxis: {
+        //     title: 'VALUES',
+        //     titlefont: {
+        //         size: 12,
+        //         color: '#1D70CA'
+        //     }
+        // }
+    };
+        $scope.options = {showLink: false, displayLogo: false};
+
+        $scope.toggleEvent=function(){
+            if($scope.dragEvent == true){
+                $scope.dragEvent = false;
+            }
+            else{
+                $scope.dragEvent = true;
+            }
+        }
 
 
 
-}]);
+    }]);

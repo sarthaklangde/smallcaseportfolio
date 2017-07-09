@@ -52,12 +52,13 @@ li {
     justify-content: space-between;
     align-items: flex-end;
 }
+
 #pagination-container{
     color:#00A9D2 ;
-    margin-top:1.5rem;
     margin-left:2rem;
     margin-right:2rem;
     margin-bottom: 2rem;
+    margin-top:0.5rem;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -123,27 +124,17 @@ li {
     padding-right:2rem;
     flex-wrap: wrap;
     justify-content: space-between;
-    min-height: 15rem;
 }
 
 .cardnew{
     position: relative;
+    margin-bottom:1rem;
     width:15rem;
     height:4.5rem;
     background: #FFFFFF;
     box-shadow: 0 0 4px 0 rgba(0,0,0,0.20);
     border-radius: 4px;
-}
-
-.card{
-    padding-left:1rem;
-    padding-top:1.25rem;
-    padding-bottom:1.25rem;
-    margin-left:2rem;
-    margin-right:1.75rem;
-    margin-bottom: 1rem;
-
-
+    cursor:crosshair;
 }
 
 .card-text{
@@ -174,29 +165,33 @@ li {
 }
 
 #filter-button{
+    position:relative;
     font-size:16px;
-    padding-top:0.75rem;
-    padding-left:1rem;
-    padding-bottom:0.75rem;
     color: #00A9D2;
     letter-spacing: 0.5px;
     width:15rem;
+    height:2.75rem;
     background: #FFFFFF;
     box-shadow: 0 1px 4px 0 rgba(0,0,0,0.30);
     border-radius: 2px;
 }
+.small-btn{
+    margin:0;
+    background-color: #FFF;
+    padding-left:3px;
+    padding-right:3px;
+    color:#287DCE ;
+    border-radius: 3px;
+    border: 2px solid #eee;
+}
+
 .circle {
     width: 1.25rem;
-    margin-left:2.75rem;
-    padding-left:0.44rem;
-    padding-right:0.44rem;
-    padding-top:0.19rem;
-    padding-bottom:0.19rem;
     height: 1.25rem;
     border-radius: 50%;
     font-size: 0.75rem;
     color: #fff;
-    line-height: 1rem;
+    line-height: 1.25rem;
     text-align: center;
     background: #009FCE;
 }
@@ -241,12 +236,8 @@ li {
     border-left: 1rem solid transparent;
 
 }
-.small-btn{
-    margin:0;
-    background-color: #FFF;
-    padding-left:3px;
-    padding-right:3px;
-    color:#287DCE ;
-    border-radius: 3px;
-    border: 2px solid #eee;
+
+
+.dragTarget{
+    opacity:0.3;
 }

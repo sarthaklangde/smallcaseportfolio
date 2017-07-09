@@ -9,8 +9,10 @@
     <script src="lib/angular-drag-and-drop-lists.min.js"></script>
     <link href="style/fonts/fonts.css" rel="stylesheet" type="text/css">
     <link href="style/styles.css" rel="stylesheet" type="text/css">
-    <script src="lib/zingchart.min.js"></script>
-    <script src="lib/zingchart-angularjs.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="lib/angular-plotly.js"></script>
+    <!-- <script src="lib/zingchart.min.js"></script>
+    <script src="lib/zingchart-angularjs.js"></script> -->
 
 </head>
 <body>
@@ -29,16 +31,16 @@
                     <div class="ribbon-top-shadow"></div>
                     <div class="triangle-top"></div>
                     <div style="color:#00A9D2">Showing {{pagestart+1}} - {{pageend}} of {{totallist.length}} matching stocks</div>
-                    <div id="filter-button" style="line-height:1.25rem">
-                        <span><img src="style/filter - FontAwesome.png" height="14px"style="margin-right:0.77rem"/>
-                        <span style="font-size:1rem">APPLY FILTERS</span>
-                        <span class="circle">3</span>
-                    </span></div>
+                    <div id="filter-button">
+                        <img src="style/filter - FontAwesome.png" height:"0.98rem"  style="position:relative;top:0.92rem;left:1rem;"/>
+                        <span style="font-size:1rem;position:absolute;top:0.75rem;left:2.75rem;line-height:1.4rem">APPLY FILTERS</span>
+                        <span class="circle" style="position:absolute;top:0.75rem;left:12.75rem">3</span>
+                    </div>
                 </div>
 
 
                 <div class="card-container">
-                    <div class="cardnew" dnd-draggable="stock" dnd-moved="addtoportlist(stock)" dnd-effect-allowed="move" ng-repeat="stock in watchlist">
+                    <div class="cardnew" dnd-draggable="stock" dnd-moved="addtoportlist(stock)"  dnd-dragstart="toggleEvent()" dnd-dragend="toggleEvent()" dnd-effect-allowed="move" ng-repeat="stock in watchlist">
 
                             <div class="card-text">{{stock.name}}</div>
                             <div class="card-group-text">Financial Services</div>
@@ -54,16 +56,16 @@
                 </div>
             </div>
             <div dnd-list="dragdroplist" style="margin-bottom:1.5rem">
-                <li>
+                <li ng-class="{'dragTarget': dragEvent == true}">
             <div id="bottom-container" style="position:relative">
                 <div class="ribbon-top" style="background-color: #287DCE;width:14.13rem;left:-1rem;">MANAGE PORTFOLIO</div>
                 <div class="ribbon-top-shadow" style="width:13.4rem;left:0rem"></div>
                 <div class="triangle-top" style="border-top: 1.5rem solid #16569B;left:-1rem;"></div>
-                <div style="width:36.5%;margin-left:2rem" >
+                <div style="width:28.5rem;margin-left:2rem" >
                     <!-- <div dnd-list="dragdroplist">
                         <li> -->
                             <table id="table-striped" class="table-striped" style="width:100%">
-                                <tr>
+                                <tr style="height:2.44rem">
                                     <th>STOCK</th>
                                     <th>PRICE</th>
                                     <th>SHARES</th>
@@ -74,7 +76,7 @@
                                     <tr ng-repeat="stock in portlist">
 
                                         <td style="color:#287DCE;font-size:0.88rem">{{stock.stockname}}</td>
-                                        <td style="color:#101010;font-family: 'Proxima Nova';">{{stock.stockprice}} </td>
+                                        <td style="color:#101010;font-family: 'Proxima Nova';">₹{{stock.stockprice}} </td>
                                         <td style="color:#222"> <button class="small-btn" ng-click="decrementqty(stock.stockname)">-</button> <input type="text" ng-model="stock.stockqty" style="width:20px;text-align:center" ng-blur="editportlist(stock.stockname, stock.stockqty)"/> <button class="small-btn"  ng-click="incrementqty(stock.stockname)">+</button> </td>
                                         <td style="color:#222;font-family: 'Proxima Nova';"> {{(stock.weightage*100).toFixed(2)}}% </td>
                                         <td> <span ng-click="removestock(stock.stockname)"><img src="style/remove_circle - material.png"</span></td>
@@ -92,12 +94,16 @@
                         <!-- </li>
                     </div> -->
                 </div>
-                <div style="width:38%;margin-left:2.5rem">
-                    <p style="color:#1D70CA;font-size:1.5rem">Portfolio Overview</p>
-                    <div zingchart id="chart-1" zc-json="myChartJson" zc-width="100%" zc-height="100%"></div>
+                <div style="width:23.8rem;margin-left:2.5rem;">
+
+                    <p style="color:#1D70CA;font-size:1.5rem;line-height:1.5rem;margin-bottom:3rem">Portfolio Overview</p>
+                    <plotly style="position:relative" plotly-data="data" plotly-layout="layout" plotly-options="options">
+                        <div style="position:absolute;top:100;left:100;z-index:2">APPPP</div>
+                    </plotly>
+                    <!-- <div zingchart id="chart-1" zc-json="myChartJson" zc-width="100%" zc-height="100%"></div> -->
                 </div>
-                <div>
-                    <table id="table-details" width:"100%"  style="margin-top:4rem;">
+                <div style="margin-left:2.88rem;;">
+                    <table id="table-details" width:"100%"  style="margin-top:5.3rem;">
                         <tr>
                             <th style="border:0">Stocks</th>
                             <th >Net Worth</th>

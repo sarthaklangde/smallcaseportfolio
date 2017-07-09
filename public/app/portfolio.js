@@ -60,7 +60,7 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     $scope.decrementqty = function(stockname){
         for(var i=0; i<$scope.portlist.length;i++){
             if($scope.portlist[i].stockname == stockname){
-                if($scope.portlist[i].stockqty!=0){
+                if($scope.portlist[i].stockqty>1){
                     $scope.portlist[i].stockqty-=1;
                     break;
                 }else{

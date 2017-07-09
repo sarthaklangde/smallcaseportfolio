@@ -82,11 +82,12 @@ li {
     width:13.44rem;
     height:3.5rem;
     background-image: linear-gradient(90deg, #2BC4DD 0%, #3489D1 100%);
-    box-shadow: 0 1px 4px 0;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.30);
     color:#fff;
     font-size: 1.13rem;
     text-align: center;
     line-height: 3.5rem;
+    cursor:pointer;
 
 }
 

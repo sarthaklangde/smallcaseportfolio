@@ -60,8 +60,13 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     $scope.decrementqty = function(stockname){
         for(var i=0; i<$scope.portlist.length;i++){
             if($scope.portlist[i].stockname == stockname){
-                $scope.portlist[i].stockqty-=1;
-                break;
+                if($scope.portlist[i].stockqty!=0){
+                    $scope.portlist[i].stockqty-=1;
+                    break;
+                }else{
+                    break;
+                }
+
             }
         }
         $scope.networthCalc();
@@ -248,6 +253,11 @@ $scope.data = [{x: [],
             y: 1,
             yanchor: 'bottom',
             text: 'VALUE',
+            font: {
+                family: 'proxima_nova_ltsemibold',
+                size: 12,
+                color: '#1D70CA '
+             },
             showarrow: false
           }, {
             xref: 'paper',
@@ -257,22 +267,27 @@ $scope.data = [{x: [],
             y: 0,
             yanchor: 'top',
             text: 'TIME',
+            font: {
+                family: 'proxima_nova_ltsemibold',
+                size: 12,
+                color: '#1D70CA '
+             },
             showarrow: false
         }],
-        // xaxis: {
-        //     title: 'TIME',
-        //     titlefont: {
-        //         size: 12,
-        //         color: '#1D70CA'
-        //     }
-        // },
-        // yaxis: {
-        //     title: 'VALUES',
-        //     titlefont: {
-        //         size: 12,
-        //         color: '#1D70CA'
-        //     }
-        // }
+        xaxis: {
+            tickfont: {
+                 family: 'proxima_nova_ltsemibold',
+                 size: 12,
+                 color: '#1D70CA'
+               },
+           },
+        yaxis: {
+            tickfont: {
+                 family: 'proxima_nova_ltsemibold',
+                 size: 12,
+                 color: '#1D70CA'
+               },
+           },
     };
         $scope.options = {showLink: false, displayLogo: false};
 

@@ -46,9 +46,9 @@
                     </div>
                 </div>
                 <div id="pagination-container">
-                    <div ng-hide="pagestart == 0" ng-click="pageback()" style="cursor:pointer">PREV</div>
+                    <div ng-hide="pagestart == 0" ng-click="pageback()" >PREV</div>
                     <div ng-show="pagestart == 0" style="opacity:0.3 ">PREV</div>
-                    <div ng-hide="totallist.length - pagestart < 8" ng-click="pagenext()" style="cursor:pointer">NEXT</div>
+                    <div ng-hide="totallist.length - pagestart < 8" ng-click="pagenext()">NEXT</div>
                     <div ng-show="totallist.length - pagestart < 8" style="opacity:0.3">NEXT</div>
                 </div>
             </div>
@@ -74,8 +74,12 @@
 
                                     <td style="color:#287DCE;font-size:0.88rem">{{stock.stockname}}</td>
                                     <td style="color:#101010;font-family: 'ProximaNovaRegular';">₹{{stock.stockprice}} </td>
-                                    <td style="color:#222;font-family:'proxima_nova_ltsemibold'"> <button class="small-btn" ng-click="decrementqty(stock.stockname)">-</button> <input type="text" ng-model="stock.stockqty" style="width:20px;font-size:1rem;text-align:center;font-family:'proxima_nova_ltsemibold'" ng-blur="editportlist(stock.stockname, stock.stockqty)"/> <button class="small-btn"  ng-click="incrementqty(stock.stockname)">+</button> </td>
-                                    <td style="color:#222;font-family: 'ProximaNovaRegular';"> {{(stock.weightage*100).toFixed(2)}}% </td>
+                                    <td style="color:#222;font-family:'proxima_nova_ltsemibold';font-size:0">
+                                        <button class="small-btn" ng-click="decrementqty(stock.stockname)" style="border-top-right-radius: 0;border-bottom-right-radius: 0"><strong>-</strong></button>
+                                        <input type="text" ng-model="stock.stockqty" class="inputstocks" ng-blur="editportlist(stock.stockname, stock.stockqty)"/>
+                                        <button class="small-btn"  ng-click="incrementqty(stock.stockname)" style="border-top-left-radius: 0;border-bottom-left-radius: 0"><strong>+</strong></button>
+                                    </td>
+                                    <td style="color:#222;font-family: 'ProximaNovaRegular';"> {{(stock.weightage*100).toFixed(1)}}% </td>
                                     <td> <span ng-click="removestock(stock.stockname)"><img src="style/remove_circle - material.png"</span></td>
                                 </tr>
 

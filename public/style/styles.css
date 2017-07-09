@@ -78,10 +78,15 @@ li {
 }
 
 .build-portfolio{
+    position:absolute;
     width:13.44rem;
     height:3.5rem;
     background-image: linear-gradient(90deg, #2BC4DD 0%, #3489D1 100%);
     box-shadow: 0 1px 4px 0;
+    color:#fff;
+    font-size: 1.13rem;
+    text-align: center;
+    line-height: 3.5rem;
 
 }
 
@@ -102,20 +107,24 @@ li {
     height: 3rem;
 }
 
-#table-details td{
-    border-left: 60px solid #FFF;
-    font-family: 'proxima_nova_ltthin';
-    color: #222;
-    font-size:1.75rem;
-}
-
-#table-details th{
-    border-left: 60px solid #FFF;
-    color:#287DCE;
-}
-
 .table-striped tr:nth-child(odd){background-color: #FAFAFA }
 
+.details-title{
+    position:absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'proxima_nova_ltsemibold';
+    font-size: 1rem;
+    color:#287DCE;
+}
+.details-text{
+    position:absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'Proxima Nova Ltone';
+    font-size: 1.75rem;
+    color:#222222 ;
+}
 
 .card-container{
     display:flex;
@@ -159,7 +168,8 @@ li {
     position:absolute;
     top:1.25rem;
     left:9rem;
-    font-family: 'proxima_nova_ltthin';
+    font-family: 'Proxima Nova Lt';
+    color:#666666;
     font-size: 1.5rem;
     line-height: 1.81rem;
 }

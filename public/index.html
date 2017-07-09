@@ -80,7 +80,7 @@
                                         <button class="small-btn"  ng-click="incrementqty(stock.stockname)" style="border-top-left-radius: 0;border-bottom-left-radius: 0"><strong>+</strong></button>
                                     </td>
                                     <td style="color:#222;font-family: 'ProximaNovaRegular';"> {{(stock.weightage*100).toFixed(1)}}% </td>
-                                    <td> <span ng-click="removestock(stock.stockname)"><img src="style/remove_circle - material.png"</span></td>
+                                    <td> <span ng-click="removestock(stock.stockname)" style="cursor:pointer"><img src="style/remove_circle - material.png"</span></td>
                                 </tr>
 
                                 <tr ng-repeat="key in tempnum | limitTo: (portlist.length - tempnum.length) track by $index">

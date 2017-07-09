@@ -95,7 +95,8 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     }
 
 
-    $scope.dragdroplist = [];
+    $scope.dragdroplist = [];//Placeholder list for drag drop
+
     $scope.addstock = function(stockname,stockprice){
         //console.log("e");
 
@@ -175,38 +176,28 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
 
 
     $scope.graphCalc = function(){
-        console.log("GRAPH CALC");
         $scope.networthDate = [];
         for(var j=0;j<$scope.dateList.length;j++){
             var sum = 0;
             for(var i=0;i<$scope.portlist.length;i++){
                 var stockname = $scope.portlist[i].stockname;
-                //console.log("---------------------------",stockname,"---------------------------");
                 sum+=($scope.maindata.historical[stockname].point[j].price * $scope.portlist[i].stockqty);
             }
-            // $scope.networthDate.push({
-            //     date: $scope.dateList[j],
-            //     networth: sum
-            // });
             $scope.networthDate.push(sum);
 
         }
         $scope.myChartJson.series[0].values=$scope.networthDate;
         $scope.data[0].y = $scope.networthDate;
         $scope.data[0].x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
-        //console.log("Networth",$scope.networthDate);
 
     }
 
     $scope.addtoportlist=function(stock){
-        console.log("STOCK",stock);
         $scope.addstock(stock.name,stock.price);
     }
 
     $scope.myChartJson = {
-        type: "area",  // Specify your chart type here.
-        //
-
+        type: "area",
         plot:{
             aspect: "spline",
             marker:{

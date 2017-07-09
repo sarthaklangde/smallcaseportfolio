@@ -138,7 +138,13 @@ li {
     padding-left:2rem;
     padding-right:2rem;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-between;
+}
+
+.card-container::after{
+  content: '';
+  width: 15rem;
 }
 
 .cardnew{
@@ -233,6 +239,7 @@ li {
     text-align: center;
 }
 
+
 .triangle-top {
     position: absolute;
     left: -3rem;
@@ -245,6 +252,7 @@ li {
 
 }
 
+
 .inputstocks{
     width:2.5rem;
     height:1.5rem;
@@ -252,7 +260,7 @@ li {
     font-size:1rem;
     text-align:center;
     font-family:'proxima_nova_ltsemibold';
-    padding:0;
+    padding-bottom:1px;
     margin:0;
     border-top: 1px solid #eee;
     border-bottom:  1px solid #eee;
@@ -264,14 +272,15 @@ li {
 
 .small-btn{
     font-family: 'Proxima Nova Ltone';
-    font-size: 1rem;
-    line-height: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
     margin:0;
     outline: none;
     background-color: #FFF;
     padding-top:1px;
-    padding-left:3px;
-    padding-right:3px;
+    padding-left:5px;
+    padding-right:5px;
+    padding-bottom: 2px;
     color:#287DCE ;
     border-radius: 4px;
     border-top-left-radius: 4px;

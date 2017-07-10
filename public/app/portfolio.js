@@ -278,6 +278,7 @@ $scope.data = [{
             showarrow: false
         }],
         xaxis: {
+            zeroline:false,
             autotick:true,
             linecolor: '#1D70CA',
             linewidth: 2,
@@ -289,6 +290,7 @@ $scope.data = [{
 
            },
         yaxis: {
+            zeroline:false,
             autotick:true,
             linecolor: '#1D70CA',
             linewidth: 2,

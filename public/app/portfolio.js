@@ -6,10 +6,6 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
         $scope.maindata = response.data;
         console.log($scope.maindata);
         $scope.portlist = [];
-        $scope.networthDate=[{
-            date: "111",
-            price: "111"
-        }];
         $scope.numstocks = 0;
         $scope.peratio = 0;
         $scope.networth = 0;
@@ -25,19 +21,18 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
             $scope.totallist.push(obj);
         });
         console.log("ITEMS QYT",$scope.totallist.length);
+
         //Now create watchlist
         $scope.pagestart = 0;
         $scope.pageend = 8;
         var totallistcopy = JSON.parse(JSON.stringify($scope.totallist));
         $scope.watchlist = totallistcopy.splice($scope.pagestart,8);
-        //console.log(totallistcopy);
 
-        //Parse list of dates to be used everywhere.
+        //Parse list of dates to be used wherever wanted.
         $scope.dateList = []
         for(var i=0; i <$scope.maindata.historical['3M'].point.length;i++){
             $scope.dateList.push($scope.maindata.historical['3M'].point[i].date);
         }
-        //console.log($scope.dateList);
 
     });
 
@@ -82,6 +77,8 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     }
 
     $scope.watchlistupdate = function(){
+
+
         var totallistcopy = JSON.parse(JSON.stringify($scope.totallist));
         var remainstocks = $scope.totallist.length - $scope.pagestart;
         if(remainstocks<8){
@@ -89,38 +86,40 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
             $scope.watchlist = totallistcopy.splice($scope.pagestart,remainstocks);
         }
         else{
-            $scope.pageend +=8;
+            $scope.pageend =$scope.pagestart+8;
             $scope.watchlist = totallistcopy.splice($scope.pagestart,8);
         }
+        if($scope.watchlist.length==0){
+            $scope.pageback();
+        }
+        console.log("Watchlist length:",$scope.watchlist);
     }
 
 
     $scope.dragdroplist = [];//Placeholder list for drag drop
 
     $scope.addstock = function(stockname,stockprice){
-        //console.log("e");
-
-        var object_found = 0;
-        for(var i=0; i<$scope.portlist.length;i++){
-            if($scope.portlist[i].stockname == stockname){
-                $scope.portlist[i].stockqty+=1;
-                object_found = 1;
-                break;
-            }
-        }
         if($scope.portlist.length < 6){
-            if(object_found == 0){
-                $scope.portlist.push({
-                    stockname: stockname,
-                    stockprice: stockprice,
-                    stockqty: 1
-                })
+
+            $scope.portlist.push({
+                stockname: stockname,
+                stockprice: stockprice,
+                stockqty: 1
+            });
+
+            for(var i=0;i<$scope.totallist.length;i++){
+                if($scope.totallist[i].name == stockname){
+                    $scope.totallist.splice(i,1);
+                    console.log("New totlist",$scope.totallist);
+                    break;
+                }
             }
+
         }
+
+        $scope.watchlistupdate();
         $scope.networthCalc();
-
-
-        //console.log($scope.portlist);
+        console.log($scope.portlist);
 
     };
 
@@ -137,11 +136,17 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     $scope.removestock = function(stockname){
         for(var i=0;i<$scope.portlist.length;i++){
             if($scope.portlist[i].stockname == stockname){
+                $scope.totallist.push({
+                    name:$scope.portlist[i].stockname,
+                    price:$scope.portlist[i].stockprice
+                });
                 $scope.portlist.splice(i,1);
                 break;
             }
         }
+        $scope.watchlistupdate();
         $scope.networthCalc();
+        console.log("totallist print",$scope.totallist);
     }
 
     $scope.networthCalc = function(){
@@ -186,121 +191,92 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
             $scope.networthDate.push(sum);
 
         }
-        $scope.myChartJson.series[0].values=$scope.networthDate;
         $scope.data[0].y = $scope.networthDate;
-        //$scope.data[0].x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
 
     }
 
     $scope.addtoportlist=function(stock){
+        console.log("Drag Drop List : ",$scope.dragdroplist);
         $scope.addstock(stock.name,stock.price);
     }
 
-    $scope.myChartJson = {
-        type: "area",
-        marker:{
-            color:'#000',
-        },
-        plot:{
-            aspect: "spline",
-            marker:{
-                visible: "false"
-            }
-        },
-        labels:[{
-            text: "VALUE",
-            x: "1%",
-            y:"11%",
-            "font-size":"12px"
-        },{
-            text: "TIME",
-            x: "80%",
-            y:"85%",
-            "font-size":"12px"
-        }
-    ],
-    "scale-x":{}, // Creates an interactive legend
-    "scale-y":{ guide:{visible:false},       }, // Creates an interactive legend
-    series: [  // Insert your series data here.
-        { values: []}
-    ]
-};
+// Plot.ly config
 
-$scope.data = [{
+    $scope.data = [{
 
-    type:'scatter',
-    fill: 'tozeroy',
-    fillcolor:'#82AFE4 ',
-    mode:'lines',
-    line: {
-        color: '#1D70CA',
-        width: 1
-      }
-    }];
-    $scope.layout = {
-        autosize:false,
-        width:380,
-        height:255,
-        margin: {
-            l: 45,
-            r: 35,
-            b: 20,
-            t: 20,
-            pad: 0
-        },
-        annotations: [{
-            xref: 'paper',
-            yref: 'paper',
-            x: 0,
-            xanchor: 'right',
-            y: 1,
-            yanchor: 'bottom',
-            text: 'VALUE',
-            font: {
-                family: 'proxima_nova_ltsemibold',
-                size: 12,
-                color: '#1D70CA '
-             },
-            showarrow: false
-          }, {
-            xref: 'paper',
-            yref: 'paper',
-            x: 1,
-            xanchor: 'left',
-            y: 0,
-            yanchor: 'top',
-            text: 'TIME',
-            font: {
-                family: 'proxima_nova_ltsemibold',
-                size: 12,
-                color: '#1D70CA '
-             },
-            showarrow: false
-        }],
-        xaxis: {
-            zeroline:false,
-            autotick:true,
-            linecolor: '#1D70CA',
-            linewidth: 2,
-            tickfont: {
-                 family: 'proxima_nova_ltsemibold',
-                 size: 12,
-                 color: '#1D70CA'
+        type:'scatter',
+        fill: 'tozeroy',
+        fillcolor:'#82AFE4 ',
+        mode:'lines',
+        line: {
+            color: '#1D70CA',
+            width: 1
+          }
+        }];
+        $scope.layout = {
+            autosize:false,
+            width:380,
+            height:255,
+            margin: {
+                l: 45,
+                r: 35,
+                b: 20,
+                t: 20,
+                pad: 0
+            },
+            annotations: [{
+                xref: 'paper',
+                yref: 'paper',
+                x: 0,
+                xanchor: 'right',
+                y: 1,
+                yanchor: 'bottom',
+                text: 'VALUE',
+                font: {
+                    family: 'proxima_nova_ltsemibold',
+                    size: 12,
+                    color: '#1D70CA '
+                 },
+                showarrow: false
+              }, {
+                xref: 'paper',
+                yref: 'paper',
+                x: 1,
+                xanchor: 'left',
+                y: 0,
+                yanchor: 'top',
+                text: 'TIME',
+                font: {
+                    family: 'proxima_nova_ltsemibold',
+                    size: 12,
+                    color: '#1D70CA '
+                 },
+                showarrow: false
+            }],
+            xaxis: {
+                zeroline:false,
+                autotick:true,
+                linecolor: '#1D70CA',
+                linewidth: 2,
+                tickfont: {
+                     family: 'proxima_nova_ltsemibold',
+                     size: 12,
+                     color: '#1D70CA'
+                   },
+
                },
-
-           },
-        yaxis: {
-            zeroline:false,
-            autotick:true,
-            linecolor: '#1D70CA',
-            linewidth: 2,
-            tickfont: {
-                 family: 'proxima_nova_ltsemibold',
-                 size: 12,
-                 color: '#1D70CA'
+            yaxis: {
+                zeroline:false,
+                autotick:true,
+                linecolor: '#1D70CA',
+                linewidth: 2,
+                tickfont: {
+                     family: 'proxima_nova_ltsemibold',
+                     size: 12,
+                     color: '#1D70CA'
+                   },
                },
-           },
-    };
+        };
         $scope.options = {showLink: false, displayLogo: false};
 
         $scope.toggleEvent=function(){

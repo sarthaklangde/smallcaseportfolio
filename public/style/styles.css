@@ -177,13 +177,12 @@ li {
 }
 
 .card-price{
-    position:absolute;
-    top:1.25rem;
-    left:9rem;
+    margin-right: 1rem;
+    text-align: right;
     font-family: 'Proxima Nova Lt';
     color:#666666;
     font-size: 1.5rem;
-    line-height: 1.81rem;
+    line-height: 4.43rem;
 }
 
 #filter-button{

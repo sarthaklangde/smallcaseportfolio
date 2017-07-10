@@ -188,13 +188,17 @@ li {
 }
 
 .tdweightage{
+    padding-right:1rem;
+    width:5rem;
     color:#222;
     font-family: 'ProximaNovaRegular';
+    padding-right: 0px;
 }
 
 .tdremoveimg{
+
      background: url('remove_circle - material.png') no-repeat;
-     background-position: center; 
+     background-position: 0rem 1rem;
      cursor: pointer;
 }
 .card-group-text{

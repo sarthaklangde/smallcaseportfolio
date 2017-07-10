@@ -3,24 +3,24 @@ var myPortfolio = angular.module('myPortfolio',['dndLists','plotly']);
 myPortfolio.controller('PortfolioController',['$scope','$http','$location','$window',function($scope,$http,$location,$window){
     $http.get("/data/data.json")
     .then(function(response){
+
         $scope.maindata = response.data;
-        console.log($scope.maindata);
+
         $scope.portlist = [];
         $scope.numstocks = 0;
         $scope.peratio = 0;
         $scope.networth = 0;
         $scope.tempnum = new Array(6);
+
+        //Lets initialize some conditions
         //Create a total list for pagination
         $scope.totallist = [];
         Object.keys($scope.maindata.price).forEach(function(key) {
-            //console.log(key);
             var obj = {};
             obj["name"]=key;
             obj["price"] = $scope.maindata.price[key];
-            //console.log(obj);
             $scope.totallist.push(obj);
         });
-        console.log("ITEMS QYT",$scope.totallist.length);
 
         //Now create watchlist
         $scope.pagestart = 0;

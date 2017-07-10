@@ -188,7 +188,7 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
         }
         $scope.myChartJson.series[0].values=$scope.networthDate;
         $scope.data[0].y = $scope.networthDate;
-        $scope.data[0].x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+        //$scope.data[0].x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
 
     }
 
@@ -198,6 +198,9 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
 
     $scope.myChartJson = {
         type: "area",
+        marker:{
+            color:'#000',
+        },
         plot:{
             aspect: "spline",
             marker:{
@@ -223,8 +226,17 @@ myPortfolio.controller('PortfolioController',['$scope','$http','$location','$win
     ]
 };
 
-$scope.data = [{x: [],
-    y: [], type:'scatter',fill: 'tozeroy'}];
+$scope.data = [{
+
+    type:'scatter',
+    fill: 'tozeroy',
+    fillcolor:'#82AFE4 ',
+    mode:'lines',
+    line: {
+        color: '#1D70CA',
+        width: 1
+      }
+    }];
     $scope.layout = {
         autosize:false,
         width:380,
@@ -234,7 +246,7 @@ $scope.data = [{x: [],
             r: 35,
             b: 20,
             t: 20,
-            pad: 5
+            pad: 0
         },
         annotations: [{
             xref: 'paper',
@@ -266,13 +278,20 @@ $scope.data = [{x: [],
             showarrow: false
         }],
         xaxis: {
+            autotick:true,
+            linecolor: '#1D70CA',
+            linewidth: 2,
             tickfont: {
                  family: 'proxima_nova_ltsemibold',
                  size: 12,
                  color: '#1D70CA'
                },
+
            },
         yaxis: {
+            autotick:true,
+            linecolor: '#1D70CA',
+            linewidth: 2,
             tickfont: {
                  family: 'proxima_nova_ltsemibold',
                  size: 12,

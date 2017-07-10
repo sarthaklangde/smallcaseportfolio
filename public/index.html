@@ -72,15 +72,16 @@
 
                                 <tr ng-repeat="stock in portlist">
 
-                                    <td style="color:#287DCE;font-size:0.88rem">{{stock.stockname}}</td>
-                                    <td style="color:#101010;font-family: 'ProximaNovaRegular';">₹{{stock.stockprice}} </td>
-                                    <td style="color:#222;font-family:'proxima_nova_ltsemibold';font-size:0;position:relative">
-                                        <button class="small-btn" ng-click="decrementqty(stock.stockname)" style="border-top-right-radius: 0;border-bottom-right-radius: 0">&minus;</button>
+                                    <td class="tdstockname">{{stock.stockname}}</td>
+                                    <td class="tdstockprice">₹{{stock.stockprice}} </td>
+                                    <td class="tdrange">
+                                        <button class="small-btn small-btn-left" ng-click="decrementqty(stock.stockname)" >&minus;</button>
                                         <input type="text" ng-model="stock.stockqty" class="inputstocks" ng-blur="editportlist(stock.stockname, stock.stockqty)"/>
-                                        <button class="small-btn"  ng-click="incrementqty(stock.stockname)" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">&plus;</button>
+                                        <button class="small-btn small-btn-right"  ng-click="incrementqty(stock.stockname)">&plus;</button>
                                     </td>
-                                    <td style="color:#222;font-family: 'ProximaNovaRegular';">{{(stock.weightage*100).toFixed(1)}}%</td>
-                                    <td> <span ng-click="removestock(stock.stockname)" style="cursor:pointer"><img src="style/remove_circle - material.png"</span></td>
+                                    <td class="tdweightage">{{(stock.weightage*100).toFixed(1)}}%</td>
+
+                                    <td ng-click="removestock(stock.stockname)" ><span class="tdremoveimg"></span></td>
                                 </tr>
 
                                 <tr ng-repeat="key in tempnum | limitTo: (portlist.length - tempnum.length) track by $index">

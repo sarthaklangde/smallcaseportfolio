@@ -172,7 +172,32 @@ li {
     left:1rem;
 }
 
+.tdstockname{
+    color:#287DCE;
+    font-size:0.88rem;
+}
+.tdstockprice{
+    color:#101010;
+    font-family: 'ProximaNovaRegular';
+}
 
+.tdrange{
+    color:#222;
+    font-family:'proxima_nova_ltsemibold';
+    font-size:0;position:relative;
+}
+
+.tdweightage{
+    color:#222;
+    font-family: 'ProximaNovaRegular';
+}
+
+.tdremoveimg{
+     padding-bottom:0.5rem;
+     padding-right: 1.5rem;
+     background: url('remove_circle - material.png') no-repeat;
+     cursor: pointer;
+}
 .card-group-text{
     position:absolute;
     top:2.5rem;
@@ -295,6 +320,16 @@ li {
     height: 1.5rem;
     width: 1.25rem;
     box-sizing:border-box;
+}
+
+.small-btn-left{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.small-btn-right{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .dragTarget{
     opacity:0.3;

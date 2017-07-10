@@ -81,7 +81,7 @@
                                     </td>
                                     <td class="tdweightage">{{(stock.weightage*100).toFixed(1)}}%</td>
 
-                                    <td ng-click="removestock(stock.stockname)" ><span class="tdremoveimg"></span></td>
+                                    <td ng-click="removestock(stock.stockname)" class="tdremoveimg"></td>
                                 </tr>
 
                                 <tr ng-repeat="key in tempnum | limitTo: (portlist.length - tempnum.length) track by $index">

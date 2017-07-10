@@ -193,9 +193,8 @@ li {
 }
 
 .tdremoveimg{
-     padding-bottom:0.5rem;
-     padding-right: 1.5rem;
      background: url('remove_circle - material.png') no-repeat;
+     background-position: center; 
      cursor: pointer;
 }
 .card-group-text{

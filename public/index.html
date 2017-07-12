@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myPortfolio">
+
 <head>
     <meta charset="utf-8">
     <title>smallcase | Portfolio Tracker </title>
@@ -12,6 +13,7 @@
     <script src="lib/plotly.js"></script>
     <script src="lib/angular-plotly.js"></script>
 </head>
+
 <body>
     <header>
         <nav></nav>
@@ -19,7 +21,7 @@
     <div class="app-container">
         <div ng-controller="PortfolioController">
             <div id="title">smallcase Portfolio Builder</div>
-            <div id="page-container" >
+            <div id="page-container">
 
 
 
@@ -29,7 +31,7 @@
                     <div class="triangle-top"></div>
                     <div style="color:#00A9D2">Showing {{pagestart+1}} - {{pageend}} of {{totallist.length}} matching stocks</div>
                     <div id="filter-button">
-                        <img src="style/filter - FontAwesome.png" height:"0.98rem"  style="position:relative;top:0.92rem;left:1rem;"/>
+                        <img src="style/filter - FontAwesome.png" height: "0.98rem" style="position:relative;top:0.92rem;left:1rem;" />
                         <span style="font-size:1rem;position:absolute;top:0.75rem;left:2.75rem;line-height:1.4rem">APPLY FILTERS</span>
                         <span class="circle" style="position:absolute;top:0.75rem;left:12.75rem;padding-left:1px">3</span>
                     </div>
@@ -37,7 +39,8 @@
 
 
                 <div class="card-container">
-                    <div class="cardnew" dnd-draggable="stock" dnd-moved="addtoportlist(stock)"  dnd-dragstart="toggleEvent()" dnd-dragend="toggleEvent()" dnd-effect-allowed="move" ng-repeat="stock in watchlist">
+                    <div class="cardnew" dnd-draggable="stock" dnd-moved="addtoportlist(stock)" dnd-dragstart="toggleEvent()" dnd-dragend="toggleEvent()"
+                        dnd-effect-allowed="move" ng-repeat="stock in watchlist">
 
                         <div class="card-text">{{stock.name}}</div>
                         <div class="card-group-text">Financial Services</div>
@@ -46,7 +49,7 @@
                     </div>
                 </div>
                 <div id="pagination-container">
-                    <div ng-hide="pagestart == 0" ng-click="pageback()" style="cursor:pointer" >PREV</div>
+                    <div ng-hide="pagestart == 0" ng-click="pageback()" style="cursor:pointer">PREV</div>
                     <div ng-show="pagestart == 0" style="opacity:0.3 ">PREV</div>
                     <div ng-hide="totallist.length - pagestart < 8" ng-click="pagenext()" style="cursor:pointer">NEXT</div>
                     <div ng-show="totallist.length - pagestart < 8" style="opacity:0.3">NEXT</div>
@@ -58,7 +61,7 @@
                         <div class="ribbon-top" style="background-color: #287DCE;width:14.13rem;left:-1rem;">MANAGE PORTFOLIO</div>
                         <div class="ribbon-top-shadow" style="width:13.4rem;left:0rem"></div>
                         <div class="triangle-top" style="border-top: 1.5rem solid #16569B;left:-1rem;"></div>
-                        <div style="width:28.5rem;margin-left:2rem" >
+                        <div style="width:28.5rem;margin-left:2rem">
                             <!-- <div dnd-list="dragdroplist">
                             <li> -->
                             <table id="table-striped" class="table-striped" style="width:100%">
@@ -75,9 +78,10 @@
                                     <td class="tdstockname">{{stock.stockname}}</td>
                                     <td class="tdstockprice">₹{{stock.stockprice}} </td>
                                     <td class="tdrange">
-                                        <button class="small-btn small-btn-left" ng-click="decrementqty(stock.stockname)" >&minus;</button>
-                                        <input type="text" ng-model="stock.stockqty" class="inputstocks" ng-blur="editportlist(stock.stockname, stock.stockqty)"/>
-                                        <button class="small-btn small-btn-right"  ng-click="incrementqty(stock.stockname)">&plus;</button>
+                                        <button class="small-btn small-btn-left" ng-click="decrementqty(stock.stockname)">&minus;</button>
+                                        <input type="text" ng-model="stock.stockqty" class="inputstocks" ng-blur="editportlist(stock.stockname, stock.stockqty)"
+                                        />
+                                        <button class="small-btn small-btn-right" ng-click="incrementqty(stock.stockname)">&plus;</button>
                                     </td>
                                     <td class="tdweightage">{{(stock.weightage*100).toFixed(1)}}%</td>
 
@@ -95,38 +99,33 @@
                             </table>
                             <!-- </li>
                         </div> -->
+                        </div>
+                        <div style="width:23.8rem;margin-left:2.5rem;">
+
+                            <p style="color:#1D70CA;font-size:1.5rem;line-height:1.5rem;margin-bottom:3rem">Portfolio Overview</p>
+                            <plotly style="position:relative" plotly-data="data" plotly-layout="layout" plotly-options="options">
+                                <div style="position:absolute;top:100;left:100;z-index:2">APPPP</div>
+                            </plotly>
+                            <!-- <div zingchart id="chart-1" zc-json="myChartJson" zc-width="100%" zc-height="100%"></div> -->
+                        </div>
+                        <div style="margin-left:2.88rem;position:relative;margin-top:8.2rem;">
+                            <div class="details-title" style="left:0rem;">Stocks</div>
+                            <div class="details-text" style="top:1.5rem">{{numstocks}}</div>
+                            <div class="details-title" style="left:7.06rem">Net Worth</div>
+                            <div class="details-text" style="top:1.5rem;left:7.06rem">₹{{networth | number:0}}</div>
+                            <div class="details-title" style="top:4.5rem">P/E Ratio</div>
+                            <div class="details-text" style="top:6rem;">{{peratio.toFixed(2)}}</div>
+                            <div class="details-title" style="top:4.5rem;left:7.06rem">P/B Ratio</div>
+                            <div class="details-text" style="top:6rem;left:7.06rem">12.4</div>
+                            <div class="build-portfolio" style="top:8.63rem;">BUILD PORTFOLIO</div>
+                            <div class=""></div>
+                        </div>
                     </div>
-                    <div style="width:23.8rem;margin-left:2.5rem;">
-
-                        <p style="color:#1D70CA;font-size:1.5rem;line-height:1.5rem;margin-bottom:3rem">Portfolio Overview</p>
-                        <plotly style="position:relative" plotly-data="data" plotly-layout="layout" plotly-options="options">
-                            <div style="position:absolute;top:100;left:100;z-index:2">APPPP</div>
-                        </plotly>
-                        <!-- <div zingchart id="chart-1" zc-json="myChartJson" zc-width="100%" zc-height="100%"></div> -->
-                    </div>
-                    <div style="margin-left:2.88rem;position:relative;margin-top:8.2rem;">
-                        <div class="details-title" style="left:0rem;">Stocks</div>
-                        <div class="details-text" style="top:1.5rem">{{numstocks}}</div>
-                        <div class="details-title" style="left:7.06rem">Net Worth</div>
-                        <div class="details-text" style="top:1.5rem;left:7.06rem">₹{{networth | number:0}}</div>
-                        <div class="details-title" style="top:4.5rem">P/E Ratio</div>
-                        <div class="details-text" style="top:6rem;">{{peratio.toFixed(2)}}</div>
-                        <div class="details-title" style="top:4.5rem;left:7.06rem">P/B Ratio</div>
-                        <div class="details-text" style="top:6rem;left:7.06rem">12.4</div>
-                        <div class="build-portfolio" style="top:8.63rem;">BUILD PORTFOLIO</div>
-                    </div>
-
-
-
-
-                </div>
-            </li>
+                </li>
+            </div>
         </div>
+
     </div>
-
-</div>
-
-
-
 </body>
+
 </html>
